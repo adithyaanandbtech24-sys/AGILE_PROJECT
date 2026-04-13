@@ -28,7 +28,7 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gearshape.fill")
                 }
         }
-        .accentColor(.blue) // Active tab color
+        .tint(.blue) // Active tab color
     }
 }
 
@@ -393,11 +393,14 @@ struct TimelineStep<Content: View>: View {
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.04), radius: 4, x:0, y:2)
             .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(borderType == .leftRed ? Color.red.opacity(0.8) : Color.clear, lineWidth: 3)
-                    .padding(.trailing, 400) // pseudo left border hack
-                    .mask(RoundedRectangle(cornerRadius: 12))
+                HStack {
+                    Rectangle()
+                        .fill(borderType == .leftRed ? Color.red.opacity(0.8) : Color.clear)
+                        .frame(width: 4)
+                    Spacer()
+                }
             )
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             .padding(.bottom, 24)
         }
     }
